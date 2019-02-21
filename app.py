@@ -4,7 +4,9 @@ from db import db
 from flask import Flask, request, redirect, Response
 from flask_cors import cross_origin, CORS
 
-from views.CalculatorView import CalculatorView
+from views.user import UserView
+from models.user import UserModel
+
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///localdata.db')
@@ -20,9 +22,9 @@ if __name__ == '__main__':
 def hello_world():
     return "running!"
 
-@app.route('/addtwo', methods=['POST'])
-def addtwo():
-    return CalculatorView.addtwo()
+@app.route('/user', methods=['POST'])
+def user():
+    return UserView.make_user()
 
 if __name__ == '__main__':
     db.init_app(app)
