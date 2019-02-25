@@ -22,9 +22,13 @@ if __name__ == '__main__':
 def hello_world():
     return "running!"
 
-@app.route('/user', methods=['POST'])
+@app.route('/signup', methods=['POST'])
 def user():
     return UserView.make_user()
+
+@app.route('/signin', methods=['POST'])
+def signin():
+    return UserView.signin()
 
 if __name__ == '__main__':
     db.init_app(app)
