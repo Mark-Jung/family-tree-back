@@ -31,22 +31,26 @@ class RelationsModel(db.Model, CommonModel):
 
     def json(self):
         return {
-            "id": self.id    #do we need to return id and user_id?
-            "name": self.name
-            "birth_year": self.birth_year
-            "is_deceased": self.is_deceased
-            "gender": self.gender
-            "relation": self.relation
-            "notes": self.notes
-            "is_step": self.is_step
+            "id": self.id,#do we need to return id and user_id?
+            "name": self.name,
+            "birth_year": self.birth_year,
+            "is_deceased": self.is_deceased,
+            "gender": self.gender,
+            "relation": self.relation,
+            "notes": self.notes,
+            "is_step": self.is_step,
             "is_adopted": self.is_adopted
-
         }
 
 
     @classmethod
     def find_by_user_id(cls, user_id):
+        print(cls.query.filter_by(user_id = user_id).all())
         return cls.query.filter_by(user_id = user_id).all()
+
+    @classmethod
+    def find_by_id(cls, id):
+        return cls.query.filter_by(id = id).first()
 
 
 

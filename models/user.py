@@ -27,3 +27,7 @@ class UserModel(db.Model, CommonModel):
     @classmethod
     def id_by_username(cls, username):
         return cls.query.filter_by(username = username).first().id
+
+    @classmethod
+    def find_by_id(cls, _id):
+        return cls.query.filter_by(id = _id).first()
