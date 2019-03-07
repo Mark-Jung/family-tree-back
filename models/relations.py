@@ -19,7 +19,7 @@ class RelationsModel(db.Model, CommonModel):
 
 
     def __init__(self, user_id, name, birth_year, is_deceased, gender, relation, notes, is_step, is_adopted):
-        self.user_id =  user_id
+        self.user_id = user_id
         self.name = name
         self.birth_year = birth_year
         self.is_deceased = is_deceased
@@ -31,14 +31,14 @@ class RelationsModel(db.Model, CommonModel):
 
     def json(self):
         return {
-            "id": self.id    #do we need to return id and user_id?
-            "name": self.name
-            "birth_year": self.birth_year
-            "is_deceased": self.is_deceased
-            "gender": self.gender
-            "relation": self.relation
-            "notes": self.notes
-            "is_step": self.is_step
+            "id": self.id,    #do we need to return id and user_id?
+            "name": self.name,
+            "birth_year": self.birth_year,
+            "is_deceased": self.is_deceased,
+            "gender": self.gender,
+            "relation": self.relation,
+            "notes": self.notes,
+            "is_step": self.is_step,
             "is_adopted": self.is_adopted
 
         }

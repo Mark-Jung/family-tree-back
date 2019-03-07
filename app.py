@@ -5,6 +5,7 @@ from flask import Flask, request, redirect, Response
 from flask_cors import cross_origin, CORS
 
 from views.user import UserView
+from views.relations import RelationsView
 from models.user import UserModel
 
 
@@ -30,11 +31,22 @@ def user():
 def signin():
     return UserView.signin()
 
+
+#did i not save my app.py from last time?
+
+@app.route('/relation', methods=['POST'])
+def make_relation():
+    return RelationsView.make_relation()
+
+@app.route('/relation/<string:user_id>', methods=['GET'])
+def get_relations(user_id):
+    return RelationsView.get_relations(user_id)
+
 if __name__ == '__main__':
     db.init_app(app)
     @app.before_first_request
     def create_tables():
         db.create_all()
-    app.run()
+    app.run(debug=True)
 
 
