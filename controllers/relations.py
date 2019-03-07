@@ -22,6 +22,6 @@ class RelationsController():
             relations = RelationsModel.find_by_user_id(user_id)
             if relations is None:
                 return "No relations found for the given user id", 400, None
-            return "", 200, json.dumps(relations)
+            return "", 200, relations
         except:
             return "Error retrieving relations for user id",500, None
