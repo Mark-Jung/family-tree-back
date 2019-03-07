@@ -1,6 +1,7 @@
 from db import db
 from models.common import CommonModel
 from util.jsonencode import JsonEncodedDict
+from datetime import datetime
 
 class RelationsModel(db.Model, CommonModel):
     __tablename__ = 'relations'
@@ -8,7 +9,7 @@ class RelationsModel(db.Model, CommonModel):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String(255))
-    birth_year = db.Column(db.Integer) #date
+    birth_year = db.Column(db.DateTime)
     is_deceased = db.Column(db.Boolean)
     gender = db.Column(db.String(255))
     relation = db.Column(db.String(255))
@@ -33,7 +34,7 @@ class RelationsModel(db.Model, CommonModel):
         return {
             "id": self.id,#do we need to return id and user_id?
             "name": self.name,
-            "birth_year": self.birth_year,
+            "birth_year": self.birth_year.strftime("%Y"),
             "is_deceased": self.is_deceased,
             "gender": self.gender,
             "relation": self.relation,
