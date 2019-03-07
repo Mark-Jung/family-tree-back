@@ -20,8 +20,8 @@ class RelationsController():
 
         try:
             relations = RelationsModel.find_by_user_id(user_id)
-            if relations is None:
-                return "No relations found for the given user id", 400, None
+            if relations == []:
+                return "No relations found for the given user id", 404, None
             return "", 200, relations
         except:
             return "Error retrieving relations for user id",500, None
