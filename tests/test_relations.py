@@ -28,14 +28,19 @@ class BasicTests(unittest.TestCase):
     def test_make_get_relation(self):
         new_relation = self.app.post('/relation', data = json.dumps({
                                                                 "user_id": 1,
-                                                                "name": "Billy Bob",
+                                                                "first": "Billy",
+                                                                "last": "Bob",
                                                                 "birth_year": "1999",
+                                                                "death_year": "2010",
                                                                 "is_deceased": True,
                                                                 "gender": "Male",
-                                                                "relation": "Brother",
+                                                                "relation": ["parent", 0],
                                                                 "notes": "this guy is cool",
                                                                 "is_step": True,
-                                                                "is_adopted": True
+                                                                "is_adopted": True,
+                                                                "birth_date": "03/11",
+                                                                "lives_in": "Alabama",
+                                                                "nickname": "Bill"
                                                                 }))
         self.assertEqual(new_relation.status_code, 201)
         get_relation = self.app.get('/relation/1')
@@ -43,7 +48,7 @@ class BasicTests(unittest.TestCase):
     
     def test_with_wrong_param(self):
         wrong_make_rel_param = self.app.post('/relation', data = json.dumps({"user_id": 1,
-                                                                            "name": "Billy Bob",
+                                                                            "first": "Billy",
                                                                             "birth_year": "1999"}))
         self.assertEqual(wrong_make_rel_param.status_code, 400)
 
@@ -51,28 +56,38 @@ class BasicTests(unittest.TestCase):
     def test_with_wrong_user_id(self):
         new_relation = self.app.post('/relation', data = json.dumps({
                                                                 "user_id": 1,
-                                                                "name": "Billy Bob",
+                                                                "first": "Billy",
+                                                                "last": "Bob",
                                                                 "birth_year": "1999",
+                                                                "death_year": "2010",
                                                                 "is_deceased": True,
                                                                 "gender": "Male",
-                                                                "relation": "Brother",
+                                                                "relation": ["parent", 0],
                                                                 "notes": "this guy is cool",
                                                                 "is_step": True,
-                                                                "is_adopted": True
+                                                                "is_adopted": True,
+                                                                "birth_date": "03/11",
+                                                                "lives_in": "Alabama",
+                                                                "nickname": "Bill"
                                                                 }))
         wrong_user_id = self.app.get('/relation/24')
-        self.assertEqual(wrong_user_id.status_code, 404)
+        self.assertEqual(wrong_user_id.status_code, 400)
 
         new_relation = self.app.post('/relation', data = json.dumps({
                                                                 "user_id": "a string",
-                                                                "name": "Billy Bob",
+                                                                "first": "Billy",
+                                                                "last": "Bob",
                                                                 "birth_year": "1999",
+                                                                "death_year": "2010",
                                                                 "is_deceased": True,
                                                                 "gender": "Male",
-                                                                "relation": "Brother",
+                                                                "relation": ["parent", 0],
                                                                 "notes": "this guy is cool",
                                                                 "is_step": True,
-                                                                "is_adopted": True
+                                                                "is_adopted": True,
+                                                                "birth_date": "03/11",
+                                                                "lives_in": "Alabama",
+                                                                "nickname": "Bill"
                                                                 }))
         self.assertEqual(new_relation.status_code, 400)
 

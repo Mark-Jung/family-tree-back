@@ -16,12 +16,13 @@ class UserController():
             # cls.logger.exception("Error in creating new user")
             return "Internal Server Error.", 500, None
         
-        return "", 201, None
+        return "", 201, new_user.id
     
     @classmethod
     def signin(cls, username):
-        if UserModel.find_by_username(username):
-            return "", 200, None
+        signed_user = UserModel.find_by_username(username)
+        if signed_user:
+            return "", 200, signed_user.id
         return "User does not exist", 400, None
 
 
