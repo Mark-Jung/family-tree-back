@@ -26,6 +26,11 @@ class BasicTests(unittest.TestCase):
         pass
 
     def test_make_get_relation(self):
+        new_user = self.app.post('/signup', data = json.dumps({"username": "uname",}))
+        self.assertEqual(new_user.status_code, 201)
+        signin_user = self.app.post('/signin', data = json.dumps({"username": "uname",}))
+        self.assertEqual(signin_user.status_code, 200)
+
         new_relation = self.app.post('/relation', data = json.dumps({
                                                                 "user_id": 1,
                                                                 "first": "Billy",
@@ -34,7 +39,7 @@ class BasicTests(unittest.TestCase):
                                                                 "death_year": "2010",
                                                                 "is_deceased": True,
                                                                 "gender": "Male",
-                                                                "relation": ["parent", 0],
+                                                                "relation": ["parent", 1],
                                                                 "notes": "this guy is cool",
                                                                 "is_step": True,
                                                                 "is_adopted": True,
@@ -54,6 +59,11 @@ class BasicTests(unittest.TestCase):
 
 
     def test_with_wrong_user_id(self):
+        new_user = self.app.post('/signup', data = json.dumps({"username": "uname",}))
+        self.assertEqual(new_user.status_code, 201)
+        signin_user = self.app.post('/signin', data = json.dumps({"username": "uname",}))
+        self.assertEqual(signin_user.status_code, 200)
+        
         new_relation = self.app.post('/relation', data = json.dumps({
                                                                 "user_id": 1,
                                                                 "first": "Billy",
@@ -62,7 +72,7 @@ class BasicTests(unittest.TestCase):
                                                                 "death_year": "2010",
                                                                 "is_deceased": True,
                                                                 "gender": "Male",
-                                                                "relation": ["parent", 0],
+                                                                "relation": ["parent", 1],
                                                                 "notes": "this guy is cool",
                                                                 "is_step": True,
                                                                 "is_adopted": True,
@@ -81,7 +91,7 @@ class BasicTests(unittest.TestCase):
                                                                 "death_year": "2010",
                                                                 "is_deceased": True,
                                                                 "gender": "Male",
-                                                                "relation": ["parent", 0],
+                                                                "relation": ["parent", 1],
                                                                 "notes": "this guy is cool",
                                                                 "is_step": True,
                                                                 "is_adopted": True,

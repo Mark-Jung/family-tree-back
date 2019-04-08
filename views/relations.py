@@ -50,6 +50,3 @@ class RelationsView(MethodView):
 
 
 
-
-if __name__ == "__main__":
-    unittest.main()

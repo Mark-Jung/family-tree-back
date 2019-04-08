@@ -1,4 +1,6 @@
 from models.user import UserModel
+from models.relations import RelationsModel
+from datetime import datetime
 #from util.logger import Logger
 #from util.parser import ReqParser
 
@@ -12,6 +14,13 @@ class UserController():
         try:
             new_user = UserModel(username)
             new_user.save_to_db()
+        except:
+            # cls.logger.exception("Error in creating new user")
+            return "Internal Server Error.", 500, None
+
+        try:
+            new_relation = RelationsModel(new_user.id, None, None, None, True, None, None, None, True, True, None, None, None)
+            new_relation.save_to_db()
         except:
             # cls.logger.exception("Error in creating new user")
             return "Internal Server Error.", 500, None

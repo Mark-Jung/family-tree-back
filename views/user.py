@@ -38,5 +38,3 @@ class UserView(MethodView):
 
         return json.dumps({"response": response}), 200
     
-if __name__ == "__main__":
-    unittest.main()

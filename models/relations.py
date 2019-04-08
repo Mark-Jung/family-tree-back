@@ -43,7 +43,7 @@ class RelationsModel(db.Model, CommonModel):
             "id": self.id,
             "first": self.first,
             "last": self.last,
-            "death_year": self.death_year.strftime("%Y"),
+            "death_year": self.death_year.strftime("%Y") if self.death_year else "",
             "is_deceased": self.is_deceased,
             "gender": self.gender,
             "relation": self.relation,
