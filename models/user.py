@@ -10,11 +10,19 @@ class UserModel(db.Model, CommonModel):
     username = db.Column(db.String(500))
 
 
-    def __init__(self, username):
+    def __init__(self, username): 
         self.username = username
+    
+    @classmethod
+    def valid_construction(cls, username):
+        if not isinstance(username, str):
+            return None
+        return cls(username)
 
     @classmethod
     def find_by_username(cls, username):
+        if not isinstance(username, str):
+            return None
         return cls.query.filter_by(username = username).first()
     
     @classmethod
@@ -27,7 +35,3 @@ class UserModel(db.Model, CommonModel):
     @classmethod
     def id_by_username(cls, username):
         return cls.query.filter_by(username = username).first().id
-
-    @classmethod
-    def find_by_id(cls, _id):
-        return cls.query.filter_by(id = _id).first()

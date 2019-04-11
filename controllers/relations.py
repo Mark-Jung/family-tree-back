@@ -1,12 +1,29 @@
 from models.relations import RelationsModel
 from models.user import UserModel
 
+from datetime import datetime
 
 class RelationsController():
     @classmethod
-    def make_relation(cls, user_id, first, last, death_year, is_deceased, gender, relation, notes, is_step, is_adopted, birth_date, lives_in, nickname):
+    def make_relation(cls, user_id, first, last, death_year, is_deceased, gender, relation, notes, is_step, is_adopted, birth_date, birth_year, lives_in, nickname):
         # if not UserModel.find_by_id(user_id):
         #     return "User with that id does not exist", 400, None
+        if birth_year and birth_date:
+            birth_total_str = birth_year + " " + birth_date
+            birth_date = datetime.strptime(birth_total_str, '%Y %m/%d')
+        elif birth_year:
+            birth_date = datetime.strptime(birth_year, '%Y')
+        elif birth_date:
+            birth_total_str = "1000" + " " + birth_date
+            birth_date = datetime.strptime(birth_total_str, '%Y %m/%d')
+        else:
+            birth_date = None
+
+        if death_year:
+            death_year = datetime.strptime(death_year, '%Y')
+        else:
+            death_year = None
+        
         rln = relation[0]
         related_to = relation[1] #id
         related_to = RelationsModel.find_by_id(related_to).relation #relation
@@ -178,10 +195,13 @@ class RelationsController():
         if relation_out == "":
             relation_out = "unknown"     
             
+        new_relation = None
         try:
-            new_relation = RelationsModel(user_id, first, last, death_year, is_deceased, gender, relation_out, notes, is_step, is_adopted, birth_date, lives_in, nickname)
+            new_relation = RelationsModel.valid_construction(user_id, first, last, death_year, is_deceased, gender, relation_out, notes, is_step, is_adopted, birth_date, lives_in, nickname)
             new_relation.save_to_db()
         except:
+            if not new_relation:
+                return "ill-formed request", 400, None
             # cls.logger.exception("Error in creating new user")
             return "Internal Server Error.", 500, None
         return "", 201, None

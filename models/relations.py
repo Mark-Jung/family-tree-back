@@ -38,6 +38,13 @@ class RelationsModel(db.Model, CommonModel):
         self.lives_in = lives_in 
         self.nickname = nickname
 
+    @classmethod
+    def valid_construction(cls, user_id, first, last, death_year, is_deceased, gender, relation, notes, is_step, is_adopted, birth_date, lives_in, nickname):
+        if not (isinstance(user_id, int) and isinstance(first, str) and isinstance(last, str) and isinstance(is_deceased, bool) and isinstance(gender, str) and isinstance(notes, str) and isinstance(is_step, bool) and isinstance(is_adopted, bool) and isinstance(lives_in, str) and isinstance(nickname, str)):
+            return None
+        return cls(user_id, first, last, death_year, is_deceased, gender, relation, notes, is_step, is_adopted, birth_date, lives_in, nickname)
+
+    
     def json(self):
         return {
             "id": self.id,
@@ -59,10 +66,4 @@ class RelationsModel(db.Model, CommonModel):
     @classmethod
     def find_by_user_id(cls, user_id):
         return cls.query.filter_by(user_id = user_id).all()
-
-    @classmethod
-    def find_by_id(cls, id):
-        return cls.query.filter_by(id = id).first()
-
-
 
