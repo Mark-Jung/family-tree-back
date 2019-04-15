@@ -48,4 +48,6 @@ class BasicTests(unittest.TestCase):
         self.assertEqual(new_user.status_code, 201)
         wrong_username = self.app.post('/signin', data = json.dumps({"username": "aaa",}))
         self.assertEqual(wrong_username.status_code, 400)
-    
+
+if __name__ == "__main__":
+    unittest.main()

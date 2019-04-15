@@ -13,14 +13,11 @@ class UserView(MethodView):
         if 'username' not in data:
             return json.dumps({"response": "ill-formed request"}), 400
         
-        if not isinstance(data['username'], str):
-            return json.dumps({"response": "ill-formed request"}), 400
-        
         error_message, status, response = UserController.make_user(data['username'])
         if error_message:
-            return json.dumps({"error_message": error_message}), status
+            return json.dumps({"response": error_message}), status
 
-        return json.dumps({"response": data['username']}), 201
+        return json.dumps({"response": response}), 201
 
     @classmethod
     def signin(cls):
@@ -29,14 +26,9 @@ class UserView(MethodView):
         if 'username' not in data:
             return json.dumps({"response": "ill-formed request"}), 400
         
-        if not isinstance(data['username'], str):
-            return json.dumps({"response": "ill-formed request"}), 400
-        
         error_message, status, response = UserController.signin(data['username'])
         if error_message:
-            return json.dumps({"error_message": error_message}), status
+            return json.dumps({"response": error_message}), status
 
-        return json.dumps({"response": data['username']}), 200
+        return json.dumps({"response": response}), 200
     
-if __name__ == "__main__":
-    unittest.main()
