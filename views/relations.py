@@ -19,7 +19,7 @@ class RelationsView(MethodView):
         if error_message:
             return json.dumps({"response": error_message}), status
 
-        return json.dumps({"response": "success!"}), 201
+        return json.dumps({"response": response}), 201
 
 ##Bug Here
     @classmethod

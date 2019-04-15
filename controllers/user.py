@@ -23,7 +23,7 @@ class UserController():
 
         new_relation = None
         try:
-            new_relation = RelationsModel.valid_construction(new_user_response.id, "", "", datetime.strptime("1900 01/01", '%Y %m/%d'), False, "", "", "", False, False, datetime.strptime("1900", '%Y'), "", "")
+            new_relation = RelationsModel.valid_construction(new_user_response.id, "", "", datetime.strptime("1900 01/01", '%Y %m/%d'), False, "", "self", "", False, False, datetime.strptime("1900", '%Y'), "", "")
             new_relation.save_to_db()
         except:
             if not new_relation:

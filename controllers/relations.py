@@ -204,7 +204,7 @@ class RelationsController():
                 return "ill-formed request", 400, None
             # cls.logger.exception("Error in creating new user")
             return "Internal Server Error.", 500, None
-        return "", 201, None
+        return "", 201, new_relation.id
 
     @classmethod
     def get_relations(cls, user_id):
