@@ -43,6 +43,9 @@ def relation():
 def relations_by_user_id(user_id):
     return RelationsView.get_relations(user_id)
 
+@app.route('/relation/<string:user_id>/<string:relation_id>', methods=['GET'])
+def relation_by_relation_id(user_id, relation_id):
+    return RelationsView.get_specific_relation(relation_id)
 
 
 if __name__ == '__main__':

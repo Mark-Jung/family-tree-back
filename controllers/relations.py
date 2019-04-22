@@ -216,3 +216,14 @@ class RelationsController():
             return "", 200, relations
         except:
             return "Error retrieving relations for user id",500, None
+
+    @classmethod
+    def get_specific_relation(cls, relation_id):
+
+        try:
+            relations = RelationsModel.find_by_relation_id(relation_id)
+            if relations == []:
+                return "No relations found for the given relation id", 400, None
+            return "", 200, relations
+        except:
+            return "Error retrieving relations for the given relation id",500, None

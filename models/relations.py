@@ -47,6 +47,14 @@ class RelationsModel(db.Model, CommonModel):
     
     def json(self):
         return {
+            "first": self.first,
+            "last": self.last,
+            "relation": self.relation,
+            "birth_date": self.birth_date.strftime("%m/%d/%Y") if self.birth_date else "", 
+        }
+
+    def individual_json(self):
+        return {
             "id": self.id,
             "first": self.first,
             "last": self.last,
@@ -60,10 +68,13 @@ class RelationsModel(db.Model, CommonModel):
             "birth_date": self.birth_date.strftime("%m/%d/%Y") if self.birth_date else "", 
             "lives_in": self.lives_in, 
             "nickname": self.nickname
-        }
+        }   
 
 
     @classmethod
     def find_by_user_id(cls, user_id):
         return cls.query.filter_by(user_id = user_id).all()
 
+    @classmethod
+    def find_by_relation_id(cls, relation_id):
+        return cls.query.filter_by(id = relation_id).all()
