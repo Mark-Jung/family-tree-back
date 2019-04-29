@@ -50,6 +50,8 @@ class BasicTests(unittest.TestCase):
         self.assertEqual(new_relation.status_code, 201)
         get_relation = self.app.get('/relation/1')
         self.assertEqual(get_relation.status_code, 200)
+        get_specific_relation = self.app.get('/relation/1/1')
+        self.assertEqual(get_specific_relation.status_code, 200)
     
     def test_with_wrong_param(self):
         wrong_make_rel_param = self.app.post('/relation', data = json.dumps({"user_id": 1,
@@ -126,9 +128,12 @@ class BasicTests(unittest.TestCase):
         self.assertEqual(new_relation.status_code, 201)
         get_relation = self.app.get('/relation/1')
         self.assertEqual(get_relation.status_code, 200)
+        get_specific_relation = self.app.get('/relation/1/1')
+        self.assertEqual(get_specific_relation.status_code, 200)
         new_rel_id = json.loads(new_relation.data.decode('utf-8'))['response']
         res = json.loads(get_relation.data.decode('utf-8'))['response']
         self.assertEqual(res[[i for i,_ in enumerate(res) if _['id'] == new_rel_id][0]]['relation'], 'father')
+
 
         new_relation = self.app.post('/relation', data = json.dumps({
                                                                 "user_id": 1,
@@ -149,6 +154,8 @@ class BasicTests(unittest.TestCase):
         self.assertEqual(new_relation.status_code, 201)
         get_relation = self.app.get('/relation/1')
         self.assertEqual(get_relation.status_code, 200)
+        get_specific_relation = self.app.get('/relation/1/2')
+        self.assertEqual(get_specific_relation.status_code, 200)
         new_rel_id = json.loads(new_relation.data.decode('utf-8'))['response']
         res = json.loads(get_relation.data.decode('utf-8'))['response']
         self.assertEqual(res[[i for i,_ in enumerate(res) if _['id'] == new_rel_id][0]]['relation'], 'grandparent')
@@ -173,6 +180,8 @@ class BasicTests(unittest.TestCase):
         self.assertEqual(new_relation.status_code, 201)
         get_relation = self.app.get('/relation/1')
         self.assertEqual(get_relation.status_code, 200)
+        get_specific_relation = self.app.get('/relation/1/3')
+        self.assertEqual(get_specific_relation.status_code, 200)
         new_rel_id = json.loads(new_relation.data.decode('utf-8'))['response']
         res = json.loads(get_relation.data.decode('utf-8'))['response']
         self.assertEqual(res[[i for i,_ in enumerate(res) if _['id'] == new_rel_id][0]]['relation'], 'grandaunt/granduncle')
@@ -196,6 +205,8 @@ class BasicTests(unittest.TestCase):
         self.assertEqual(new_relation.status_code, 201)
         get_relation = self.app.get('/relation/1')
         self.assertEqual(get_relation.status_code, 200)
+        get_specific_relation = self.app.get('/relation/1/4')
+        self.assertEqual(get_specific_relation.status_code, 200)
         new_rel_id = json.loads(new_relation.data.decode('utf-8'))['response']
         res = json.loads(get_relation.data.decode('utf-8'))['response']
         self.assertEqual(res[[i for i,_ in enumerate(res) if _['id'] == new_rel_id][0]]['relation'], 'sister')
@@ -219,6 +230,8 @@ class BasicTests(unittest.TestCase):
         self.assertEqual(new_relation.status_code, 201)
         get_relation = self.app.get('/relation/1')
         self.assertEqual(get_relation.status_code, 200)
+        get_specific_relation = self.app.get('/relation/1/5')
+        self.assertEqual(get_specific_relation.status_code, 200)
         new_rel_id = json.loads(new_relation.data.decode('utf-8'))['response']
         res = json.loads(get_relation.data.decode('utf-8'))['response']
         self.assertEqual(res[[i for i,_ in enumerate(res) if _['id'] == new_rel_id][0]]['relation'], 'niece')
@@ -242,6 +255,8 @@ class BasicTests(unittest.TestCase):
         self.assertEqual(new_relation.status_code, 201)
         get_relation = self.app.get('/relation/1')
         self.assertEqual(get_relation.status_code, 200)
+        get_specific_relation = self.app.get('/relation/1/6')
+        self.assertEqual(get_specific_relation.status_code, 200)
         new_rel_id = json.loads(new_relation.data.decode('utf-8'))['response']
         res = json.loads(get_relation.data.decode('utf-8'))['response']
         self.assertEqual(res[[i for i,_ in enumerate(res) if _['id'] == new_rel_id][0]]['relation'], 'niece-in-law/nephew-in-law')

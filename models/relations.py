@@ -47,6 +47,7 @@ class RelationsModel(db.Model, CommonModel):
     
     def json(self):
         return {
+            "id": self.id,
             "first": self.first,
             "last": self.last,
             "relation": self.relation,
