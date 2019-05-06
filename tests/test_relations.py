@@ -48,9 +48,9 @@ class BasicTests(unittest.TestCase):
                                                                 "nickname": "Bill"
                                                                 }))
         self.assertEqual(new_relation.status_code, 201)
-        get_relation = self.app.get('/relation/1')
+        get_relation = self.app.get('/relations/1')
         self.assertEqual(get_relation.status_code, 200)
-        get_specific_relation = self.app.get('/relation/1/1')
+        get_specific_relation = self.app.get('/relation/1')
         self.assertEqual(get_specific_relation.status_code, 200)
     
     def test_with_wrong_param(self):
@@ -61,6 +61,49 @@ class BasicTests(unittest.TestCase):
 
 
     def test_with_wrong_user_id(self):
+        new_user = self.app.post('/signup', data = json.dumps({"username": "uname",}))
+        self.assertEqual(new_user.status_code, 201)
+        signin_user = self.app.post('/signin', data = json.dumps({"username": "uname",}))
+        self.assertEqual(signin_user.status_code, 200)
+        
+        new_relation = self.app.post('/relation', data = json.dumps({
+                                                                "user_id": 1,
+                                                                "first": "Billy",
+                                                                "last": "Bob",
+                                                                "birth_year": "1999",
+                                                                "death_year": "2010",
+                                                                "is_deceased": True,
+                                                                "gender": "Male",
+                                                                "relation": ["parent", 1],
+                                                                "notes": "this guy is cool",
+                                                                "is_step": True,
+                                                                "is_adopted": True,
+                                                                "birth_date": "03/11",
+                                                                "lives_in": "Alabama",
+                                                                "nickname": "Bill"
+                                                                }))
+        wrong_user_id = self.app.get('/relations/24')
+        self.assertEqual(wrong_user_id.status_code, 400)
+
+        new_relation = self.app.post('/relation', data = json.dumps({
+                                                                "user_id": "a string",
+                                                                "first": "Billy",
+                                                                "last": "Bob",
+                                                                "birth_year": "1999",
+                                                                "death_year": "2010",
+                                                                "is_deceased": True,
+                                                                "gender": "Male",
+                                                                "relation": ["parent", 1],
+                                                                "notes": "this guy is cool",
+                                                                "is_step": True,
+                                                                "is_adopted": True,
+                                                                "birth_date": "03/11",
+                                                                "lives_in": "Alabama",
+                                                                "nickname": "Bill"
+                                                                }))
+        self.assertEqual(new_relation.status_code, 400)
+
+    def test_with_wrong_relation_id(self):
         new_user = self.app.post('/signup', data = json.dumps({"username": "uname",}))
         self.assertEqual(new_user.status_code, 201)
         signin_user = self.app.post('/signin', data = json.dumps({"username": "uname",}))
@@ -126,9 +169,9 @@ class BasicTests(unittest.TestCase):
                                                                 "nickname": "Bill"
                                                                 }))
         self.assertEqual(new_relation.status_code, 201)
-        get_relation = self.app.get('/relation/1')
+        get_relation = self.app.get('/relations/1')
         self.assertEqual(get_relation.status_code, 200)
-        get_specific_relation = self.app.get('/relation/1/1')
+        get_specific_relation = self.app.get('/relation/1')
         self.assertEqual(get_specific_relation.status_code, 200)
         new_rel_id = json.loads(new_relation.data.decode('utf-8'))['response']
         res = json.loads(get_relation.data.decode('utf-8'))['response']
@@ -152,9 +195,9 @@ class BasicTests(unittest.TestCase):
                                                                 "nickname": "Jenn"
                                                                 }))
         self.assertEqual(new_relation.status_code, 201)
-        get_relation = self.app.get('/relation/1')
+        get_relation = self.app.get('/relations/1')
         self.assertEqual(get_relation.status_code, 200)
-        get_specific_relation = self.app.get('/relation/1/2')
+        get_specific_relation = self.app.get('/relation/2')
         self.assertEqual(get_specific_relation.status_code, 200)
         new_rel_id = json.loads(new_relation.data.decode('utf-8'))['response']
         res = json.loads(get_relation.data.decode('utf-8'))['response']
@@ -178,9 +221,9 @@ class BasicTests(unittest.TestCase):
                                                                 "nickname": "Joe"
                                                                 }))
         self.assertEqual(new_relation.status_code, 201)
-        get_relation = self.app.get('/relation/1')
+        get_relation = self.app.get('/relations/1')
         self.assertEqual(get_relation.status_code, 200)
-        get_specific_relation = self.app.get('/relation/1/3')
+        get_specific_relation = self.app.get('/relation/3')
         self.assertEqual(get_specific_relation.status_code, 200)
         new_rel_id = json.loads(new_relation.data.decode('utf-8'))['response']
         res = json.loads(get_relation.data.decode('utf-8'))['response']
@@ -203,9 +246,9 @@ class BasicTests(unittest.TestCase):
                                                                 "nickname": "Ann"
                                                                 }))
         self.assertEqual(new_relation.status_code, 201)
-        get_relation = self.app.get('/relation/1')
+        get_relation = self.app.get('/relations/1')
         self.assertEqual(get_relation.status_code, 200)
-        get_specific_relation = self.app.get('/relation/1/4')
+        get_specific_relation = self.app.get('/relation/4')
         self.assertEqual(get_specific_relation.status_code, 200)
         new_rel_id = json.loads(new_relation.data.decode('utf-8'))['response']
         res = json.loads(get_relation.data.decode('utf-8'))['response']
@@ -228,9 +271,9 @@ class BasicTests(unittest.TestCase):
                                                                 "nickname": "LOL"
                                                                 }))
         self.assertEqual(new_relation.status_code, 201)
-        get_relation = self.app.get('/relation/1')
+        get_relation = self.app.get('/relations/1')
         self.assertEqual(get_relation.status_code, 200)
-        get_specific_relation = self.app.get('/relation/1/5')
+        get_specific_relation = self.app.get('/relation/5')
         self.assertEqual(get_specific_relation.status_code, 200)
         new_rel_id = json.loads(new_relation.data.decode('utf-8'))['response']
         res = json.loads(get_relation.data.decode('utf-8'))['response']
@@ -253,9 +296,9 @@ class BasicTests(unittest.TestCase):
                                                                 "nickname": "bubble"
                                                                 }))
         self.assertEqual(new_relation.status_code, 201)
-        get_relation = self.app.get('/relation/1')
+        get_relation = self.app.get('/relations/1')
         self.assertEqual(get_relation.status_code, 200)
-        get_specific_relation = self.app.get('/relation/1/6')
+        get_specific_relation = self.app.get('/relation/6')
         self.assertEqual(get_specific_relation.status_code, 200)
         new_rel_id = json.loads(new_relation.data.decode('utf-8'))['response']
         res = json.loads(get_relation.data.decode('utf-8'))['response']
