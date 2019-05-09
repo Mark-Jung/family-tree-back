@@ -222,7 +222,7 @@ class RelationsController():
 
         try:
             relations = RelationsModel.find_by_relation_id(relation_id)
-            if relations == []:
+            if relations == None:
                 return "No relations found for the given relation id", 400, None
             return "", 200, relations
         except:
