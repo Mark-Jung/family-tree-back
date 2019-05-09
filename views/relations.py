@@ -34,7 +34,7 @@ class RelationsView(MethodView):
         error_message, status, response = RelationsController.get_specific_relation(relation_id)
         if error_message:
             return json.dumps({"response": error_message}), status
-        return json.dumps({"response": list(map(lambda x: x.individual_json() if x else None, response))}), status
+        return json.dumps({"response": list(response.individual_json())}), status
 
 
 

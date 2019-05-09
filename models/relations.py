@@ -78,4 +78,4 @@ class RelationsModel(db.Model, CommonModel):
 
     @classmethod
     def find_by_relation_id(cls, relation_id):
-        return cls.query.filter_by(id = relation_id).all()
+        return cls.query.filter_by(id = relation_id).first()
