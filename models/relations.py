@@ -71,11 +71,6 @@ class RelationsModel(db.Model, CommonModel):
             "nickname": self.nickname
         }   
 
-
-    @classmethod
-    def find_by_user_id(cls, user_id):
-        return cls.query.filter_by(user_id = user_id).all()
-
     @classmethod
     def find_by_relation_id(cls, relation_id):
         return cls.query.filter_by(id = relation_id).first()
