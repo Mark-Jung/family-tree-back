@@ -72,5 +72,6 @@ class RelationsModel(db.Model, CommonModel):
         }   
 
     @classmethod
-    def find_by_relation_id(cls, relation_id):
-        return cls.query.filter_by(id = relation_id).first()
+    def find_by_user_id(cls, user_id):
+        return cls.query.filter_by(user_id = user_id).all()
+

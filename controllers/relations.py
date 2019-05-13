@@ -15,7 +15,7 @@ class RelationsController():
             birth_date = datetime.strptime(birth_year, '%Y')
         elif birth_date:
             birth_total_str = "1000" + " " + birth_date
-            birth_date = datetime.strptime(birth_total_str, '%Y %m/%d')
+            birth_date = datetime.strptime(birth_totßal_str, '%Y %m/%d')
         else:
             birth_date = None
 
@@ -223,7 +223,7 @@ class RelationsController():
     def get_specific_relation(cls, relation_id):
 
         try:
-            relations = RelationsModel.find_by_relation_id(relation_id)
+            relations = RelationsModel.find_by_id(relation_id)
             if relations == None:
                 return "No relations found for the given relation id", 400, None
             return "", 200, relations
