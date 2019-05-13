@@ -63,6 +63,20 @@ class RelationsController():
                     relation_out = "aunt"
                 elif gender == "other":
                     relation_out = "aunt/uncle"
+            elif related_to == "wife" or related_to == "husband" or related_to == "partner":
+                if gender == "male":
+                    relation_out = "father-in-law"
+                elif gender == "female":
+                    relation_out = "mother-in-law"
+                elif gender == "other":
+                    relation_out = "parent-in-law"
+            elif related_to == "mother-in-law" or related_to == "father-in-law" or related_to == "parent-in-law":
+                if gender == "male":
+                    relation_out = "grandfather-in-law"
+                elif gender == "female":
+                    relation_out = "grandmother-in-law"
+                elif gender == "other":
+                    relation_out = "grandparent-in-law"
                
         elif rln == "child":
             if related_to == "self":
