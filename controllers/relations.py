@@ -101,7 +101,14 @@ class RelationsController():
                 elif gender == "female":
                     relation_out = "grandaunt"
                 elif gender == "other":
-                    relation_out = "grandaunt/granduncle"            
+                    relation_out = "grandaunt/granduncle"   
+            elif related_to == "son" or related_to == "daughter" or related_to == "child":
+                if gender == "male":
+                    relation_out = "grandson"
+                elif gender == "female":
+                    relation_out = "granddaughter"
+                elif gender == "other":
+                    relation_out = "grandchild"
 
         elif rln == "sibling":
             if related_to == "self":
